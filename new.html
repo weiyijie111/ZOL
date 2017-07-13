@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/new.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript"src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/template-web.js"></script>
+	<script type="text/html" id="newsInfo">
+		<li class="breadcrumb">
+			<div><a href="#">首页</a>/<a href="#">街区新闻</a></div>
+		</li>
+		{{each data value}}
+			<li class="list-group-item">
+		    	<h4><a href="#">{{value.ntitle}}</a></h4>
+		    	<div class="newsInfo">
+		    		<img src="images/{{value.nimg}}" id="new-img">
+			    	<p>{{value.ncontent}}</p>
+		    	</div>
+		    </li>
+		{{/each}}
+		<div class="row col-md-5 col-sm-12 col-md-offset-4">
+			<nav aria-label="Page navigation">
+			  <ul class="pagination">
+			    <li>
+			      <a href="#" aria-label="Previous">
+			        <span aria-hidden="true">&laquo;</span>
+			      </a>
+			    </li>
+			    <li><a href="#">1</a></li>
+			    <li><a href="#">2</a></li>
+			    <li><a href="#">3</a></li>
+			    <li><a href="#">4</a></li>
+			    <li><a href="#">5</a></li>
+			    <li>
+			      <a href="#" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
+			    </li>
+			  </ul>
+			</nav>
+		</div>
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			$.post("news.php", function(data){
+				var htmlstr = template("newsInfo", {"data": data});
+				$("#newspage").html(htmlstr);
+			}, "json");
+		});
+
+		$(window).resize(function() {
+			var w = document.body.clientWidth;
+			if (w < "970") {
+				$(".panel-img2").find("li:gt(2)").css("display", "none");
+				$("#nav").css("display", "block");
+				$("#toptitle").css("display", "none");
+			}else{
+				$(".panel-img2").find("li:gt(2)").css("display", "block");
+				$("#nav").css("display", "none");
+				$("#toptitle").css("display", "block");
+			}
+		});
+	</script>
+</head>
+<body>
+	<div class="navbar navbar-default navbar-static-top navbar-fixed-top">
+		<div class="container">
+			<div class="row">
+			<!-- 导航 -->
+				<div class="navbar-header">
+						<img src="images/logo.png" class="navbar-brand  col-md-6">
+					</div>
+					<!-- <div id="navmore" > -->
+						<div id="toptitle">
+							<ul class="nav navbar-nav navbar-right  col-sm-6 col-md-4 col-md-offset-4 ">
+								<li><a href="one.html">首页</a></li>
+								<li><a href="new.html">街区新闻</a></li>
+								<li><a href="institution.html">入驻机构</a></li>
+								<li><a href="activity.html">街区活动</a></li>
+							</ul>
+						</div>
+					<!-- </div> -->
+
+					<div class="dropdown"  id="nav">
+						<button class="btn btn-default" data-toggle="dropdown">
+				            MENU
+				        </button>
+				        <ul class="dropdown-menu">
+							<li><a href="#">首页</a></li>
+							<li><a href="new.html">街区新闻</a></li>
+							<li><a href="institution.html">入驻机构</a></li>
+							<li><a href="activity.html">街区活动</a></li>
+						</ul>
+					</div>
+			</div>
+		</div>
+	</div>
+<!-- 背景部分 -->
+	<div class="row" id="imgnav">
+		<img src="images/111.jpg" class="back">
+		<span id="words-back" class="col-md-4 col-md-offset-5 ">聚集创业服务 孵化科技企业 孕育创业文化</span>
+	</div>
+
+<!-- 街区新闻面板 -->
+	<div class="col-md-2 col-md-offset-2">
+		<!-- 面板 -->
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<h4>街区新闻</h4>
+			</div>
+			<div class="panel-body">
+				<h6 id="words-new">街区新闻</h6>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 新闻主页面 -->
+	<ul class="list-group col-md-6" id="newspage">
+		
+		<!-- 分页 -->
+		<div class="row col-md-5 col-md-offset-4">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+				    <li>
+						<a href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+				    </li>
+				    <li><a href="#">1</a></li>
+				    <li><a href="#">2</a></li>
+				    <li><a href="#">3</a></li>
+				    <li><a href="#">4</a></li>
+				    <li><a href="#">5</a></li>
+				    <li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</ul>
+	
+	<!-- 底部栏 -->
+	<nav class="navbar navbar-default navbar-fixed-bottom" id="footnav">
+		<p id="footer-word">版权所有：北京海置科创服务有限公司 京ICP备14017783号-1 京公网安备11010802017670</p>
+	</nav>
+</body>
+</html>

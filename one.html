@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>中关村创业大街</title>
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/template-web.js"></script>
+	
+	<script id="newsInfoOne" type="text/html">
+		<li class="list-group-item" id="news-word"><h4><a href="#">宝马汽车公司代表团来访中关村创业大街</a></h4></li>
+		<p> 自开街以来，中关村创业大街积极帮助全球创新创业企业进入中国市场，为来自16个国家的30多个创新项目对接了投资人、合作企业等资源，同时与海尔、英特尔、中海油等建立大企业开放创新联盟，开展最前沿领域的创新需求对接，共同服务创新创业。</p>
+		{{each data v}}
+			<li class="list-group-item" id="news-word"><h4><a href="#">{{v.ntitle}}</a></h4></li>
+		{{/each}}
+
+	</script>
+	<!-- <script id="newsInfoTwo" type="text/html">
+		<li class="list-group-item" id="list-group-item"><p>{{data.ncontent}}</p></li>
+	</script> -->
+
+	<script id="jigouInfo" type="text/html">
+        {{each data v}}
+           <li class=" col-md-4 com-sm-12  list-li" >
+				<img src="images/{{v.jimg}}" class="img-circle">
+				<div class="detail">
+					<h4>{{v.jname}}</h4>
+					<span>{{v.jcontent}}</span>
+				</div>
+			</li>
+		{{/each}}
+	</script>
+	<script type="text/javascript">
+		
+		$(function(){
+			$.post("news.php", function(data){
+				var htmlstr = template("newsInfoOne", {"data": data});
+				$("#news1").html(htmlstr);
+			}, "json");
+			// $.post("news.php", function(data){
+			// 	var htmlstr = template("newsInfoTwo", {"data": data});
+			// 	$("#news2").html(htmlstr);
+			// }, "json");
+
+			$.post("institution.php", function(data){
+				var htmlstr = template("jigouInfo", {"data": data});
+				$("#list").html(htmlstr);
+			}, "json");
+
+			$(".panel-img2").hover(function(){
+				$(".panel-img2").find("img").hover(function(){
+					$(this).css("border", "4px solid orange");
+				},function(){
+					$(this).css("border", "2px solid #ccc");
+				});
+			});
+		})
+
+		
+		$(window).resize(function() {
+			var w = document.body.clientWidth;
+			if (w < "970") {
+				$(".panel-img2").find("li:gt(2)").css("display", "none");
+				$("#nav").css("display", "block");
+				$("#toptitle").css("display", "none");
+			}else{
+				$(".panel-img2").find("li:gt(2)").css("display", "block");
+				$("#nav").css("display", "none");
+				$("#toptitle").css("display", "block");
+			}
+		});
+	</script>
+</head>
+<body>
+<!-- 导航 -->
+	<header>
+		<div class="navbar navbar-default navbar-static-top  navbar-fixed-top">
+			<div class="container">
+				<div class="row">
+				<!-- 导航 -->
+					<div class="navbar-header">
+						<img src="images/logo.png" class="navbar-brand  col-md-6">
+					</div>
+					<!-- <div id="navmore" > -->
+						<div id="toptitle">
+							<ul class="nav navbar-nav navbar-right  col-sm-6 col-md-4 col-md-offset-4 ">
+								<li><a href="one.html">首页</a></li>
+								<li><a href="new.html">街区新闻</a></li>
+								<li><a href="institution.html">入驻机构</a></li>
+								<li><a href="activity.html">街区活动</a></li>
+							</ul>
+						</div>
+					<!-- </div> -->
+
+					<div class="dropdown"  id="nav">
+						<button class="btn btn-default" data-toggle="dropdown">
+				            MENU
+				        </button>
+				        <ul class="dropdown-menu">
+							<li><a href="#">首页</a></li>
+							<li><a href="new.html">街区新闻</a></li>
+							<li><a href="institution.html">入驻机构</a></li>
+							<li><a href="activity.html">街区活动</a></li>
+						</ul>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</header>
+	
+<!-- 轮播图部分 -->
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel"  >
+			<!-- 底部跳转页面 -->
+		<ol class="carousel-indicators">
+			<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+		</ol>
+
+	 <!-- 轮播图图片部分 -->
+		<div class="carousel-inner" role="listbox">
+			<div class="item active">
+				<img src="images/banner_n_07.jpg" >
+				<div class="carousel-caption">
+				</div>
+			</div>
+			<div class="item">
+				<img src="images/banner_10.jpg">
+				<div class="carousel-caption">
+				</div>
+			</div>
+			<div class="item">
+				<img src="images/banner_12.jpg">
+				<div class="carousel-caption">
+				</div>
+			</div>
+			<div class="item">
+				<img src="images/banner_n_07s.jpg">
+				<div class="carousel-caption">
+				</div>
+			</div>
+		</div>
+		<!-- 左右跳转 -->
+		<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+
+	<!-- 街区新闻 -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<div class="row">
+					<div class="panel panel-defalut col-md-12" >
+						<div class="panel-heading ">
+							<h2>街区新闻</h2>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body panel-img1">
+					<img src="images/bng5.jpg" id="bng5">
+				</div>
+			</div>
+			<!-- 右侧部分 -->
+			<div class="col-sm-12 col-md-6" id="newdata">
+				<ul class="list-group" id="news1">
+				</ul>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<ul class="list-group" id="news2">
+				</ul>
+			</div>
+		</div>
+		<!-- 入驻机构 -->
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="junbotron">
+					<h4>入驻机构</h4>
+					<div id="activity">
+						<ul class="list-group panel-img2" id="list">
+							<!-- <li class=" col-md-4 com-sm-12  list-li" >
+								<img src="images/55adb1f0922cf.jpg" class="img-circle">
+								<div class="words com-sm-6">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/55b18f271faf0.gif" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/568cd5343f525.gif" class="img-circle">
+								<div class="words ">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/56b2ab8db9bea.jpg" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/56f35bf25b14c.jpg" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/5382d949c32e6.gif" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/5382d939c6df0.gif" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li>
+
+							<li class=" col-md-4 com-sm-12 list-li">
+								<img src="images/5382d8f746dae.gif" class="img-circle">
+								<div class="words">
+									<a href="#"><h4 >创业邦</h4></a>
+									<p >最懂创业者，离资本最近</p>
+								</div>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 街区活动 -->
+		<div class="row" >
+			<div class="col1"><h3 class="smalltitle">街区活动</h3></div>
+	    </div>
+	    <div class="row huodong">
+			<div class="col1 col-xs-12 col-md-6">
+			    <div  class="animate" id="one">
+			        <img src="images/bng1.png" class="bng1" id="bng1">
+			    </div>
+			</div>
+			<div class="col2 col-xs-12 col-md-6">
+				<div class="col2 col-sm-12">
+				    <div  class="animate"  id="two">
+					    <img src="images/bng2.png" class="bng2 " id="bng2">
+					</div>
+				</div>
+				<div class="col2 col-sm-12">
+					<div class="col2 col-sm-6" ><div  class="animate"  id="three"><img src="images/bng3.png" class="bng3" id="bng3"></div></div>
+					<div class="col2 col-sm-6" ><div  class="animate"  id="four"><img src="images/bng4.png" class="bng4" id="bng4"></div></div>
+				</div>
+			</div>
+	    </div>
+	</div>
+	<!--  -->
+	<nav class="navbar navbar-default navbar-fixed-bottom" id="footnav">
+		<p id="footer-word">版权所有：北京海置科创服务有限公司 京ICP备14017783号-1 京公网安备11010802017670</p>
+	</nav>
+</body>
+</html>
